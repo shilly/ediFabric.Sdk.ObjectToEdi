@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B2431F6-7ECE-41BF-ACFC-7091F2B333FA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EdiFabric.Sdk.ObjectToEdi.ConsoleApplication</RootNamespace>
+    <AssemblyName>EdiFabric.Sdk.ObjectToEdi.ConsoleApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EdiFabric.Framework, Version=6.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ediFabric.Framework.6.2.4\lib\net40\EdiFabric.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\EdifactHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\X12Helper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestFiles\CustomEdifact.xml" />
+    <EmbeddedResource Include="TestFiles\CustomX12.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomClasses\CustomClasses.csproj">
+      <Project>{3f33e731-aa6d-476a-9ebd-fc8064f9efa7}</Project>
+      <Name>CustomClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomXsd\CustomXsd.csproj">
+      <Project>{56d68eb9-4e8b-455e-a574-4a7a9137c46d}</Project>
+      <Name>CustomXsd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EdiClasses\EdiClasses.csproj">
+      <Project>{84cc2163-d768-4b5c-91ba-95fd257d0120}</Project>
+      <Name>EdiClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EdiMaps\EdiMaps.csproj">
+      <Project>{11861ba1-ea84-485a-8139-e32819433529}</Project>
+      <Name>EdiMaps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EdiXsd\EdiXsd.csproj">
+      <Project>{229378ad-bf61-49d4-9cff-1ca8a8bd1b51}</Project>
+      <Name>EdiXsd</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
