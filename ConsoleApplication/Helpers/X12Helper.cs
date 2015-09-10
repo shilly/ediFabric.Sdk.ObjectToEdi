@@ -73,9 +73,42 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication.Helpers
 
         private static S_ISA CreateIsa()
         {
-            var isa = new S_ISA();
-
-            return isa;
+            return new S_ISA
+            {
+                // Authorization Information Qualifier
+                D_744_1 = "00",
+                // Authorization Information
+                D_745_2 = "          ",
+                // Security Information Qualifier
+                D_746_3 = "00",
+                // Security Information
+                D_747_4 = "          ",
+                // Interchange ID Qualifier
+                D_704_5 = "01",
+                // Interchange Sender
+                D_705_6 = "SENDERID",
+                // Interchange ID Qualifier
+                D_704_7 = "02",
+                // Interchange Receiver
+                D_706_8 = "PARTNERID",
+                // Date
+                D_373_9 = DateTime.Now.Date.ToString("YYMMdd"),
+                // Time
+                D_337_10 = DateTime.Now.TimeOfDay.ToString("hhmm"),
+                // Standard identifier
+                D_726_11 = "U",
+                // Interchange Version ID
+                // This is the ISA version and not the transaction sets versions
+                D_703_12 = "00204",
+                // Interchange Control Number
+                D_709_13 = "111111111",
+                // Acknowledgment Requested (0 or 1)
+                D_749_14 = "1",
+                // Test Indicator
+                D_748_15 = "T",
+                // Component separator
+                D_701_16 = ">"
+            };
         }
 
         private static S_IEA CreateIea(int groupsCount)
