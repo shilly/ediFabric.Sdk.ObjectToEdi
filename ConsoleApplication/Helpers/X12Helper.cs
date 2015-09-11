@@ -15,11 +15,11 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication.Helpers
     {
         private static Message Generate810MessageWithCodeMap(Custom810 custom810)
         {
-            // Map the custom edi into ediFabric edi (the instance of the class that represents the transaction set & version)
+            // Map the custom EDI into ediFabric EDI (the instance of the class that represents the transaction set & version)
             // This uses a code map (I use Automapper here, but can be any code\mapper map)
             var ediFabric810 = custom810.Map();
 
-            // Create edifabric message (this serializes the instance and passes the xml + context (transaction set, version, format))
+            // Create ediFabric message (this serializes the instance and passes the xml + context (transaction set, version, format))
             var msg = new Message(ediFabric810);
 
             // Validate to ensure it's a valid EDI message

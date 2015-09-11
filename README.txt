@@ -1,0 +1,1 @@
+Please go to ConsoleApplication project -> Program file for EDI generation samples.

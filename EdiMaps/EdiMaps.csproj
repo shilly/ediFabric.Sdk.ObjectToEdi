@@ -58,6 +58,7 @@
   <ItemGroup>
     <Content Include="Xslt\CustomInvoic_To_EdiFabricInvoic.xslt" />
     <Content Include="Xslt\ToEdifabricInvoic.dll" />
+    <Content Include="Xslt\xsltc.exe" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomClasses\CustomClasses.csproj">

@@ -17,23 +17,17 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication.Helpers
     {
         private static Message GenerateInvoicMessageWithCompiledXsltMap(CustomInvoic customInvoic)
         {
-            // Map the custom edi into ediFabric edi (the instance of the class that represents the transaction set & version)
+            // Map the custom EDI into ediFabric EDI (the instance of the class that represents the transaction set & version)
             var serializedCustomInvoic = XslHelper.Serialize(customInvoic, "customedifact");
             // This uses a precompiled xslt, therefore needs to serialize to XML first
             // You can generate an xsd for the custom object using xsd.exe or xsd2code
             var ediFabricInvoic = serializedCustomInvoic.Map();
 
-            // Create edifabric message (this serializes the instance and passes the xml + context (transaction set, version, format))
+            // Create ediFabric message (this serializes the instance and passes the xml + context (transaction set, version, format))
             var msg = new Message(ediFabricInvoic);
 
             // Set the UNT segment count
-            var segCount = msg.Item.Descendants().Count(d => d.Name.LocalName.StartsWith("S_"));
-
-            var nmn = new XmlNamespaceManager(new NameTable());
-            nmn.AddNamespace("p", "www.edifabric.com/edifact");
-
-            var untSegCount = msg.Item.XPathSelectElement("./p:S_UNT/p:D_0074_1", nmn);
-            untSegCount.SetValue(segCount);
+            SetSegmentsCount(ref msg);
 
             // Validate to ensure it's a valid EDI message
             var brokenRules = msg.Validate().ToList();
@@ -109,6 +103,23 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication.Helpers
             {
                 Messages = new List<Message> {message}
             };
+        }
+
+        private static void SetSegmentsCount(ref Message msg)
+        {
+            // Set the UNT segment count
+            var segCount =
+                msg.Item.Descendants()
+                    .Count(
+                        d =>
+                            d.Name.LocalName.StartsWith("S_") && !string.IsNullOrEmpty(d.Value) &&
+                            !string.IsNullOrWhiteSpace(d.Value));
+
+            var nmn = new XmlNamespaceManager(new NameTable());
+            nmn.AddNamespace("p", "www.edifabric.com/edifact");
+
+            var untSegCount = msg.Item.XPathSelectElement("./p:S_UNT/p:D_0074_1", nmn);
+            untSegCount.SetValue(segCount);
         }
 
         internal static Interchange CreateInterchange(CustomInvoic customInvoic)
