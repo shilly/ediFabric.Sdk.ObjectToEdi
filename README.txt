@@ -1,1 +1,1 @@
-Please go to ConsoleApplication project -> Program file for EDI generation samples.
+Please go to ConsoleApplication project -> Program.cs for EDI generation samples.
