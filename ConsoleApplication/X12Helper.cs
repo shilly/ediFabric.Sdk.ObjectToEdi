@@ -87,6 +87,11 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
 
             result.G_IT1.Add(gIt1);
 
+            var st = new S_ST {D_143_1 = "810", D_329_2 = "001"};
+
+            result.S_ST = st;
+            result.S_SE = new S_SE();
+
             return result;
         }
     }

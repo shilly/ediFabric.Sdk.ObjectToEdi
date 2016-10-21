@@ -93,10 +93,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         public static void GenerateWithValidation()
         {
             var mInvoic = EdifactHelper.CreateMessage();
-            var xsd =
-                Assembly.Load("EdiFabric.Sdk.ObjectToEdi.Xsd")
-                    .GetManifestResourceStream("EdiFabric.Sdk.ObjectToEdi.Xsd.EF_EDIFACT_D00A_INVOIC.xsd");
-            var errors = mInvoic.ValidateEdifact(xsd);
+            var errors = mInvoic.Validate();
             if (errors.Any())
             {
                 // Inspect errors
@@ -117,7 +114,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         public static void ConvertToXml()
         {
             var mInvoic = EdifactHelper.CreateMessage();
-            XDocument xml = mInvoic.SerializeEdifact();
+            XDocument xml = mInvoic.Serialize();
         }
     }
 }

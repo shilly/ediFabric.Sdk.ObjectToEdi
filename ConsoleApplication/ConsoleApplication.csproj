@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EdiFabric.Framework, Version=6.7.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ediFabric.Framework.6.7.9\lib\net45\EdiFabric.Framework.dll</HintPath>
+    <Reference Include="EdiFabric.Framework, Version=6.8.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ediFabric.Framework.6.8.2\lib\net45\EdiFabric.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -60,6 +60,10 @@
     <ProjectReference Include="..\Rules\Rules.csproj">
       <Project>{76f08feb-eff5-455f-a967-d2f9d28c3678}</Project>
       <Name>Rules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xsd\Xsd.csproj">
+      <Project>{daec3608-c028-456f-8638-5c42ac560c47}</Project>
+      <Name>Xsd</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

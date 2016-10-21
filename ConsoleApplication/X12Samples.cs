@@ -95,10 +95,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         public static void GenerateWithValidation()
         {
             var m810 = X12Helper.CreateMessage();
-            var xsd =
-                Assembly.Load("EdiFabric.Sdk.ObjectToEdi.Xsd")
-                    .GetManifestResourceStream("EdiFabric.Sdk.ObjectToEdi.Xsd.EF_X12_002040_810.xsd");
-            var errors = m810.ValidateX12(xsd);
+            var errors = m810.Validate();
             if (errors.Any())
             {
                 // Inspect errors
@@ -121,7 +118,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         public static void ConvertToXml()
         {
             var m810 = X12Helper.CreateMessage();
-            XDocument xml = m810.SerializeX12();
+            XDocument xml = m810.Serialize();
         }
     }
 }

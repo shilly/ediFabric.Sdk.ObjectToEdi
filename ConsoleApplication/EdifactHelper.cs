@@ -68,6 +68,15 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
 
             result.G_LIN.Add(gLin);
 
+            var unh = new S_UNH
+            {
+                D_0062_1 = "001",
+                C_S009 = new C_S009 {D_0065_1 = "INVOIC", D_0052_2 = "D", D_0054_3 = "00A", D_0051_4 = "UN"}
+            };
+
+            result.S_UNH = unh;
+            result.S_UNT = new S_UNT();
+
             return result;
         }       
     }
