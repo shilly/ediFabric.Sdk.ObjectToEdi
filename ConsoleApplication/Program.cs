@@ -12,7 +12,7 @@
         {
             X12Samples.Generate();
             X12Samples.GenerateWithCustomSeparators();
-            X12Samples.GenerateWithValidation();
+            X12Samples.Validation();
             X12Samples.ConvertToXml();
             X12Samples.GenerateToString();
             X12Samples.GenerateToStringWithCrLfPostfix();
@@ -22,7 +22,7 @@
         {
             EdifactSamples.Generate();
             EdifactSamples.GenerateWithCustomSeparators();
-            EdifactSamples.GenerateWithValidation();
+            EdifactSamples.Validation();
             EdifactSamples.ConvertToXml();
             EdifactSamples.GenerateToString();
             EdifactSamples.GenerateToStringWithCrLfPostfix();
