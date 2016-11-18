@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Xml.Linq;
 using EdiFabric.Framework;
 using EdiFabric.Framework.Controls;
@@ -9,10 +8,15 @@ using EdiFabric.Rules.X12002040810;
 
 namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
 {
+    /// <summary>
+    /// ISA D_701_16 and D_726_11 are automatically set.
+    /// All trailers are set automatically and do not need to be populated.
+    /// </summary>
     class X12Samples
     {
         /// <summary>
-        /// Generates a collection of segments.
+        /// Generate an interchange as a collection of segments.
+        /// This is a valid EDI message.
         /// </summary>
         public static void Generate()
         {
@@ -26,10 +30,11 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
             ediInterchange.AddItem(ediGroup);
 
             IEnumerable<string> ediSegments = ediInterchange.GenerateEdi();
+            // The segments can be concatenated with postfix (new line, etc.)
         }
 
         /// <summary>
-        /// Generates EDI string.
+        /// Generate EDI message with no postfix.
         /// </summary>
         public static void GenerateToString()
         {
@@ -48,7 +53,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         }
 
         /// <summary>
-        /// Generates EDI string with a postfix (CRLF in this example)
+        /// Generates EDI string with a postfix (CRLF in this example).
         /// </summary>
         public static void GenerateToStringWithCrLfPostfix()
         {
@@ -69,7 +74,6 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
 
         /// <summary>
         /// Generates EDI with custom separators.
-        /// ISA D_701_16 and D_726_11 are automatically set.
         /// </summary>
         public static void GenerateWithCustomSeparators()
         {
@@ -90,26 +94,20 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         }
 
         /// <summary>
-        /// Validates the object before generating EDI.
+        /// Validates a message object.
         /// </summary>
-        public static void GenerateWithValidation()
+        public static void Validation()
         {
             var m810 = X12Helper.CreateMessage();
-            var errors = m810.Validate();
+            List<string> errors = m810.Validate().Flatten().ToList();
             if (errors.Any())
             {
                 // Inspect errors
-            }
-
-            var groupHeader = X12Helper.CreateGs();
-            var interchangeHeader = X12Helper.CreateIsa();
-
-            var ediGroup = new X12Group<M_810>(groupHeader);
-            ediGroup.AddItem(m810);
-            var ediInterchange = new X12Interchange(interchangeHeader);
-            ediInterchange.AddItem(ediGroup);
-
-            IEnumerable<string> ediSegments = ediInterchange.GenerateEdi();
+                foreach (var error in errors)
+                {
+                    // Log error, etc.
+                }               
+            }           
         }
 
         /// <summary>

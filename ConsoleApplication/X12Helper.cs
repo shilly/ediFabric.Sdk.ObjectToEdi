@@ -18,7 +18,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
                 // Application Receivers Code
                 D_124_3 = "PARTNERID",
                 // Date
-                D_29_4 = DateTime.Now.Date.ToString("YYMMdd"),
+                D_29_4 = DateTime.Now.Date.ToString("yyMMdd"),
                 // Time
                 D_30_5 = DateTime.Now.TimeOfDay.ToString("hhmm"),
                 // Group Control Number
@@ -52,7 +52,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
                 // Interchange Receiver
                 D_706_8 = "PARTNERID",
                 // Date
-                D_373_9 = DateTime.Now.Date.ToString("YYMMdd"),
+                D_373_9 = DateTime.Now.Date.ToString("yyMMdd"),
                 // Time
                 D_337_10 = DateTime.Now.TimeOfDay.ToString("hhmm"),
                 // Standard identifier
@@ -90,8 +90,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
             var st = new S_ST {D_143_1 = "810", D_329_2 = "001"};
 
             result.S_ST = st;
-            result.S_SE = new S_SE();
-
+            
             return result;
         }
     }

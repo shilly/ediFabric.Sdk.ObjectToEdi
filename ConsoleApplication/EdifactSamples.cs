@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Xml.Linq;
 using EdiFabric.Framework;
 using EdiFabric.Framework.Controls;
@@ -9,10 +8,14 @@ using EdiFabric.Rules.EdifactD00AINVOIC;
 
 namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
 {
+    /// <summary>
+    /// All trailers are set automatically and do not need to be populated.
+    /// </summary>
     class EdifactSamples
     {
         /// <summary>
-        /// Generates a collection of segments.
+        /// Generate an interchange as a collection of segments.
+        /// This is a valid EDI message.
         /// </summary>
         public static void Generate()
         {
@@ -25,10 +28,11 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
             ediInterchange.AddItem(ediGroup);
 
             IEnumerable<string> ediSegments = ediInterchange.GenerateEdi();
+            // The segments can be concatenated with postfix (new line, etc.)
         }
 
         /// <summary>
-        /// Generates EDI string.
+        /// Generate EDI message with no postfix.
         /// </summary>
         public static void GenerateToString()
         {
@@ -66,7 +70,6 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
 
         /// <summary>
         /// Generates EDI with custom separators.
-        /// ISA D_701_16 and D_726_11 are automatically set.
         /// </summary>
         public static void GenerateWithCustomSeparators()
         {
@@ -88,24 +91,20 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         }
 
         /// <summary>
-        /// Validates the object before generating EDI.
+        /// Validates a message object.
         /// </summary>
-        public static void GenerateWithValidation()
+        public static void Validation()
         {
             var mInvoic = EdifactHelper.CreateMessage();
-            var errors = mInvoic.Validate();
+            List<string> errors = mInvoic.Validate().Flatten().ToList();
             if (errors.Any())
             {
                 // Inspect errors
+                foreach (var error in errors)
+                {
+                    // Log error, etc.
+                }
             }
-
-            var interchangeHeader = EdifactHelper.CreateUnb();
-            var ediGroup = new EdifactGroup<M_INVOIC>(null);
-            ediGroup.AddItem(mInvoic);
-            var ediInterchange = new EdifactInterchange(interchangeHeader);
-            ediInterchange.AddItem(ediGroup);
-
-            IEnumerable<string> ediSegments = ediInterchange.GenerateEdi();
         }
 
         /// <summary>
