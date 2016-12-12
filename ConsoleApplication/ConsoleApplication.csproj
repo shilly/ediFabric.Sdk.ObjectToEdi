@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EdiFabric.Framework, Version=6.8.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ediFabric.Framework.6.8.6\lib\net45\EdiFabric.Framework.dll</HintPath>
+    <Reference Include="EdiFabric.Framework, Version=7.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ediFabric.Framework.7.0.3\lib\net45\EdiFabric.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

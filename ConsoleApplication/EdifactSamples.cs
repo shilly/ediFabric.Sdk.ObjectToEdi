@@ -81,8 +81,8 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
             var ediInterchange = new EdifactInterchange(interchangeHeader);
             ediInterchange.AddItem(ediGroup);
 
-            var defaultSep = Separators.DefaultSeparatorsEdifact();
-            var newSep = Separators.SeparatorsEdifact('>', ':',
+            var defaultSep = Separators.DefaultEdifact();
+            var newSep = new Separators('>', ':',
                 defaultSep.DataElement,
                 defaultSep.RepetitionDataElement,
                 defaultSep.Escape);
@@ -96,7 +96,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         public static void Validation()
         {
             var mInvoic = EdifactHelper.CreateMessage();
-            List<string> errors = mInvoic.Validate().Flatten().ToList();
+            List<string> errors = EdiValidation.Validate(mInvoic).Flatten().ToList();
             if (errors.Any())
             {
                 // Inspect errors
@@ -113,7 +113,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         public static void ConvertToXml()
         {
             var mInvoic = EdifactHelper.CreateMessage();
-            XDocument xml = mInvoic.Serialize();
+            XDocument xml = EdiValidation.Serialize(mInvoic);
         }
     }
 }

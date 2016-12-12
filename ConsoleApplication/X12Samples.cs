@@ -86,10 +86,10 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
             var ediInterchange = new X12Interchange(interchangeHeader);
             ediInterchange.AddItem(ediGroup);
 
-            var defaultSep = Separators.DefaultSeparatorsX12();
-            var newSep = Separators.SeparatorsX12('>', ':',
+            var defaultSep = Separators.DefaultX12();
+            var newSep = new Separators('>', ':',
                 defaultSep.DataElement,
-                defaultSep.RepetitionDataElement);
+                defaultSep.RepetitionDataElement, null);
             IEnumerable<string> ediSegments = ediInterchange.GenerateEdi(newSep);
         }
 
@@ -99,7 +99,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         public static void Validation()
         {
             var m810 = X12Helper.CreateMessage();
-            List<string> errors = m810.Validate().Flatten().ToList();
+            List<string> errors = EdiValidation.Validate(m810).Flatten().ToList();
             if (errors.Any())
             {
                 // Inspect errors
@@ -116,7 +116,7 @@ namespace EdiFabric.Sdk.ObjectToEdi.ConsoleApplication
         public static void ConvertToXml()
         {
             var m810 = X12Helper.CreateMessage();
-            XDocument xml = m810.Serialize();
+            XDocument xml = EdiValidation.Serialize(m810);
         }
     }
 }
